@@ -19,7 +19,6 @@ int main() {
 	Fraction test4(210, -60);
 	cout << "Should be \"-7/2\": " << test4 << endl;
 
-	/*
 	// Test exception for when denominator is zero
 	try {
 		Fraction test5(4, 0);
@@ -32,23 +31,29 @@ int main() {
 	cout << "Numerator should be -7: " << test4.numerator() << endl;
 	cout << "Denominator should be 2: " << test4.denominator() << endl;
 
+
 	// Test binary arithmetic operators
 	Fraction test6(9, 8);
 	Fraction test7(1, 6);
 	Fraction test8 = test6 + test7;
 	cout << "Should be \"31/24\": " << test8 << endl;
+
 	Fraction test9 = test6 - test7;
 	cout << "Should be \"23/24\": " << test9 << endl;
 	Fraction test10 = test6 - 1;
 	cout << "Should be \"1/8\": " << test10 << endl;
+
 	Fraction test11 = 2 - test7;
 	cout << "Should be \"11/6\": " << test11 << endl;
+
 	Fraction test12 = test6 * test7;
 	cout << "Should be \"3/16\": " << test12 << endl;
+
 	Fraction test13 = test6 / test7;
 	cout << "Should be \"27/4\": " << test13 << endl;
 
 	// Test unary negation
+
 	cout << "Should be \"-1/6\": " << -test7 << endl;
 
 	// Test pre and post-increment operators
@@ -80,6 +85,7 @@ int main() {
 	if (1 < test6)
 		cout << "Second mixed type comparison passed." << endl;
 
+
 	// Test input, exception and +=:
 	Fraction sum(0);
 	Fraction fin;
@@ -95,7 +101,7 @@ int main() {
 		}
 	} while (fin != 0);
 	cout << "Sum is: " << sum << endl;
-	*/
+
 	return 0;
 
 } // end main

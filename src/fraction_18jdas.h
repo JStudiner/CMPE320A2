@@ -12,17 +12,49 @@
 class Fraction{
 public:
 	Fraction();
-	Fraction(int numerator);
-	Fraction(int numerator,int denominator);
-	friend ostream& operator<<(ostream& os, const Fraction& frac);
-	int getNumerator() const;
-	int getDenominator() const;
+	Fraction(int n);
+	Fraction(int n,int d);
+	Fraction operator-();
+	Fraction operator++();
+	Fraction operator++(int);
+	void operator+=(const Fraction& f1);
+
+	int numerator() const;
+	int denominator() const;
 
 private:
-	int numerator;
-	int denominator;
-	int GCD(int numerator,int denominator)const;
+	int num;
+	int denom;
+
+friend ostream& operator<<(ostream& os, const Fraction& frac);
+
+friend istream& operator>>(istream& is,Fraction& frac);
+
+friend Fraction operator+(const Fraction& f1, const Fraction& f2);
+
+friend Fraction operator-(const Fraction& f1, const Fraction& f2);
+
+friend Fraction operator*(const Fraction& f1, const Fraction& f2);
+
+friend Fraction operator/(const Fraction& f1, const Fraction& f2);
+
+
+
+friend bool operator==(const Fraction& f1, const Fraction& f2);
+
+friend bool operator!=(const Fraction& f1, const Fraction& f2);
+
+friend bool operator>(const Fraction& f1, const Fraction& f2);
+
+friend bool operator<(const Fraction& f1, const Fraction& f2);
+
+friend bool operator>=(const Fraction& f1, const Fraction& f2);
+
+friend bool operator<=(const Fraction& f1, const Fraction& f2);
+
+
 };
+
 
 
 class FractionException{

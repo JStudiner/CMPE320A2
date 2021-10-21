@@ -1,42 +1,143 @@
 #include <iostream>
 #include<cmath>
+#include<string>
 using namespace std;
 
 #include "fraction_18jdas.h"
+int GCD(int n,int d);
+bool
+FractionException::FractionException(const string& message) : message(message) {}
+string& FractionException::what() { return message; }
 
 Fraction::Fraction(){
-	numerator=0;
-	denominator=1;
+	num=0;
+	denom=1;
 
 }
 
+//hello
 Fraction::Fraction(int n){
-	numerator=n;
-	denominator=1;
+	num=n;
+	denom=1;
 }
 
 Fraction::Fraction(int n,int d){
-	int negative=1;
-	if((n<0)!=(d<0))negative=-1;
+	if(d==0){
+		throw FractionException("The denominator is 0 you can't do this buddy");
+	}
+
 	int gcd=GCD(n,d);
-	numerator=negative*n/gcd;
-	denominator=negative*d/gcd;
+
+	if(d<0){
+		num=-n/gcd;
+		denom=-d/gcd;
+	}
+	else {
+		num=n/gcd;
+		denom=d/gcd;
+	}
+
+
 }
-int Fraction::GCD(int n,int d) const{
+
+int GCD(int n,int d){
 	n=abs(n);
 	d=abs(d);
 	if(d<=n &&n%d==0)return d;
 	else if(n<d)return GCD(d,n);
 	else return GCD(d,n%d);
 }
-int Fraction::getNumerator() const{
-	return numerator;
+int Fraction::numerator() const{
+	return num;
 }
-int Fraction::getDenominator() const{
-	return denominator;
+
+int Fraction::denominator() const{
+	return denom;
 }
 
 ostream& operator<<(ostream& os,const Fraction& frac){
-	os<<frac.getNumerator()<<"/"<<frac.getDenominator();
+	os<<frac.num<<"/"<<frac.denom;
 	return os;
+}
+
+istream& operator>>(istream& in,Fraction& frac){
+	string token;
+	if(!(in>>token))throw FractionException("Invalid input");
+	int num,denom;
+
+
+}
+
+Fraction operator+(const Fraction& frac1, const Fraction& frac2){
+	int totalNumerator=frac1.num*frac2.denom+frac2.num*frac1.denom;
+	int denominator=frac1.denom*frac2.denom;
+	return 	Fraction(totalNumerator,denominator);
+}
+
+Fraction operator-(const Fraction& frac1, const Fraction& frac2){
+	int totalNumerator=frac1.num*frac2.denom-frac2.num*frac1.denom;
+	int denominator=frac1.denom*frac2.denom;
+	return 	Fraction(totalNumerator,denominator);
+}
+
+Fraction operator*(const Fraction& frac1, const Fraction& frac2){
+	int totalNumerator=frac1.num*frac2.num;
+	int denominator=frac1.denom*frac2.denom;
+	return 	Fraction(totalNumerator,denominator);
+}
+
+
+Fraction operator/(const Fraction& frac1, const Fraction& frac2){
+	int totalNumerator=frac1.num*frac2.denom;
+	int denominator=frac1.denom*frac2.num;
+	return 	Fraction(totalNumerator,denominator);
+}
+
+Fraction Fraction::operator-(){
+	return Fraction(-num,denom);
+}
+
+Fraction Fraction::operator++(){
+	*this=*this+1;
+	return *this;
+}
+
+Fraction Fraction::operator++(int){
+	Fraction temp=*this;
+	*this=*this+1;
+	return temp;
+}
+
+void Fraction::operator+=(const Fraction& f1){
+	*this=*this+f1;
+}
+
+bool operator==(const Fraction& f1, const Fraction& f2){
+	if (f1.numerator()==f2.numerator()&& f1.denominator()==f2.denominator())return true;
+	return false;
+}
+
+bool operator!=(const Fraction& f1, const Fraction& f2){
+	if(f1.numerator()!=f2.numerator() || f1.numerator()!=f2.denominator())return true;
+		return false;
+}
+
+bool operator>(const Fraction& f1, const Fraction& f2){
+	if((f1.numerator()*f2.denominator())>(f1.denominator()*f2.numerator())) return true;
+	return false;
+}
+
+bool operator<(const Fraction& f1, const Fraction& f2){
+	if((f1.numerator()*f2.denominator())<(f1.denominator()*f2.numerator())) return true;
+	return false;
+}
+
+bool operator>=(const Fraction& f1, const Fraction& f2){
+	if((f1.numerator()*f2.denominator())>=(f1.denominator()*f2.numerator())) return true;
+	return false;
+}
+
+bool operator<=(const Fraction& f1, const Fraction& f2){
+	if((f1.numerator()*f2.denominator())<=(f1.denominator()*f2.numerator())) return true;
+	return false;
 }
