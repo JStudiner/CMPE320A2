@@ -87,6 +87,7 @@ int main() {
 
 
 	// Test input, exception and +=:
+
 	Fraction sum(0);
 	Fraction fin;
 	cout << "\nSumming fractions. Enter fractions as \"1/2\" or just enter a single integer." << endl;
@@ -100,6 +101,7 @@ int main() {
 			cout << e.what() << endl;
 		}
 	} while (fin != 0);
+
 	cout << "Sum is: " << sum << endl;
 
 	return 0;

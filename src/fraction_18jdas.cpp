@@ -1,3 +1,8 @@
+/*
+ * Jack Studiner
+ * Submitted on October 22nd, 2021
+ */
+
 #include <iostream>
 #include<cmath>
 #include<string>
@@ -5,7 +10,7 @@ using namespace std;
 
 #include "fraction_18jdas.h"
 int GCD(int n,int d);
-bool
+
 FractionException::FractionException(const string& message) : message(message) {}
 string& FractionException::what() { return message; }
 
@@ -15,7 +20,7 @@ Fraction::Fraction(){
 
 }
 
-//hello
+
 Fraction::Fraction(int n){
 	num=n;
 	denom=1;
@@ -40,13 +45,15 @@ Fraction::Fraction(int n,int d){
 
 }
 
+//gcd uses a recursive algorithim to determine the greatest common divisor of two integers
 int GCD(int n,int d){
 	n=abs(n);
 	d=abs(d);
-	if(d<=n &&n%d==0)return d;
+	if(d<=n && n%d==0)return d;
 	else if(n<d)return GCD(d,n);
 	else return GCD(d,n%d);
 }
+
 int Fraction::numerator() const{
 	return num;
 }
@@ -60,12 +67,17 @@ ostream& operator<<(ostream& os,const Fraction& frac){
 	return os;
 }
 
-istream& operator>>(istream& in,Fraction& frac){
-	string token;
-	if(!(in>>token))throw FractionException("Invalid input");
-	int num,denom;
-
-
+istream& operator>>(istream &in,Fraction& frac){
+	char slash;
+	cin>>frac.num;
+	if(frac.num==0){
+		frac.denom=1;
+		return in;
+	}
+	else{
+	cin>>slash>>frac.denom;
+	}
+	return in;
 }
 
 Fraction operator+(const Fraction& frac1, const Fraction& frac2){
@@ -118,7 +130,7 @@ bool operator==(const Fraction& f1, const Fraction& f2){
 }
 
 bool operator!=(const Fraction& f1, const Fraction& f2){
-	if(f1.numerator()!=f2.numerator() || f1.numerator()!=f2.denominator())return true;
+	if(f1.numerator()!=f2.numerator() || f1.denominator()!=f2.denominator())return true;
 		return false;
 }
 
